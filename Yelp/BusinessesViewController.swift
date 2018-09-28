@@ -8,25 +8,27 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
     var businesses: [Business]!
-    var searchBar: UISearchBar!
+    //var searchBar: UISearchBar!
+    //var searchController: UISearchController!
     @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
-        searchBar = UISearchBar()
+
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        let searchBar = UISearchBar()
         searchBar.sizeToFit()
         
         navigationItem.titleView = searchBar
+ 
         
         
-        
-        super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension //this is saying to use the autodimension stuff to set the rowheight
         tableView.estimatedRowHeight = 120 //this is only used for the scroll height 
         
@@ -48,7 +50,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         
         
-        
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm(term: "Restaurants", sort: .distance, categories: ["asianfusion", "burgers"]) { (businesses, error) in
                 self.businesses = businesses
@@ -60,6 +61,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
          */
         
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
